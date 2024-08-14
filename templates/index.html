@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AI Search In Eccomerce</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+</head>
+
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <a href="#">AI Search</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+        </ul>
+        <div class="cart">
+          <a href="#"><img src="{{ url_for('static', filename='cart-icon.jpeg') }}" alt="Cart" class="cart-icon"><span class="cart-count">0</span></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="search-container">
+      <div class="search-bar">
+        <input type="text" name="search" autocomplete="off" placeholder="Search..." value="white shirt">
+        <input type="text" name="themes" autocomplete="off" placeholder="More of...">
+        <input type="text" name="negatives" autocomplete="off" placeholder="Less of...">
+      </div>
+    </div>
+    <div class="container" id="results-container"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 AI Search In Eccomerce. P2807211 . All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    $(document).ready(function () {
+      // Function to generate a random price
+      function getRandomPrice(min, max) {
+        return (Math.random() * (max - min) + min).toFixed(2);
+      }
+
+      // Function to handle search
+      function search() {
+        $.ajax({
+          type: 'POST',
+          url: "{{ url_for('search_results') }}",
+          data: JSON.stringify({
+            search: $(".search-bar input[name='search']").val(),
+            themes: $(".search-bar input[name='themes']").val(),
+            negatives: $(".search-bar input[name='negatives']").val()
+          }),
+
+          dataType: 'json',
+          contentType: 'application/json',
+          success: function (hits) {
+            $("#results-container").html("");
+
+            for (var i = 0; i < hits.length; i++) {
+              var hit = hits[i];
+              var randomPrice = getRandomPrice(10, 100); // Generate a random price between £10 and £100
+              var resultHtml = `
+                <div class="result">
+                  <img src="${hit['image']}" alt="Image for ${hit['_id']}">
+                  <div class="result-content">
+                    <p class="result-price">£${randomPrice}</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                  </div>
+                </div>
+              `;
+              $("#results-container").append(resultHtml);
+            }
+          }
+        });
+      }
+
+      // Perform search on page load with default search value
+      search();
+
+      // Search when clicking the button
+      $("#search-button").click(function (event) {
+        event.preventDefault();
+        search();
+      });
+
+      // Search when pressing the Enter key
+      $(".search-bar input[type='text']").keydown(function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          search();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
