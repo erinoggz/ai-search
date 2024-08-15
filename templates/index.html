@@ -20,17 +20,17 @@
           <li><a href="#">Home</a></li>
           <li><a href="#">Products</a></li>
         </ul>
-        <div class="cart">
-          <a href="#"><img src="{{ url_for('static', filename='cart-icon.jpeg') }}" alt="Cart" class="cart-icon"><span class="cart-count">0</span></a>
-        </div>
       </div>
+       <div class="cart">
+          <a href="#"><img src="{{ url_for('static', filename='images/cart.jpg') }}" alt="Cart" class="cart-icon"><span class="cart-count">0</span></a>
+        </div>
     </nav>
   </header>
 
   <main>
     <div class="search-container">
       <div class="search-bar">
-        <input type="text" name="search" autocomplete="off" placeholder="Search..." value="white shirt">
+        <input type="text" name="search" autocomplete="off" placeholder="Search..." value="">
         <input type="text" name="themes" autocomplete="off" placeholder="More of...">
         <input type="text" name="negatives" autocomplete="off" placeholder="Less of...">
       </div>
