@@ -13,7 +13,7 @@ CLIENT = marqo.Client(url=URL)
 INDEX_NAME = os.getenv("MARQO_INDEX_NAME", None)
 
 DEVICE = os.getenv("MARQO_DEVICE", "cpu")
-print("==== {CLIENT} {INDEX_NAME} {URL}")
+print("= {CLIENT} {INDEX_NAME} {URL}")
 
 @app.route("/", methods=["GET", "POST"])
 def index():

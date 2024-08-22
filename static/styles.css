@@ -102,12 +102,12 @@ main {
 .search-bar input[type="text"] {
   font-size: 16px;
   padding: 10px;
-  border-radius: 30px;
   border: 1px solid #ddd;
   outline: none;
   background-color: #fafafa;
   color: #333;
   transition: box-shadow 0.3s, border-color 0.3s;
+  width: 50%;
 }
 
 .search-bar input[type="text"]::placeholder {
@@ -124,7 +124,6 @@ main {
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
 }
