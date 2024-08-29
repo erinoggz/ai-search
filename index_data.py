@@ -66,7 +66,7 @@ def get_data() -> Dict[str, str]:
     Fetch the dataset from a local file
     """
     # Update this path to the location where you've saved the CSV file
-    local_file_path = "ecommerce_meta_data_clean.csv"
+    local_file_path = "ecommerce_data_clean.csv"
     
     if not os.path.isfile(local_file_path):
         raise FileNotFoundError(f"The file {local_file_path} does not exist. Please download the CSV file and place it in the project directory.")
