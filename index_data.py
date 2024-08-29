@@ -86,10 +86,7 @@ def get_data() -> Dict[str, str]:
 
 
 def index_data(documents: Dict[str, str]) -> None:
-    """
-    Index the data into Marqo
-    """
-    print(f"Indexing data with requests of {REQUEST_CHUNK_SIZE} documents...")
+    print(f"Indexing data with requests of {REQUEST_CHUNK_SIZE} documents....")
     for i in tqdm(range(0, len(documents), REQUEST_CHUNK_SIZE), desc="Indexing data"):
         chunk = documents[i : i + REQUEST_CHUNK_SIZE]
 
@@ -111,9 +108,6 @@ def index_data(documents: Dict[str, str]) -> None:
 
 
 def setupApp() -> None:
-    """
-    Driver function to do all the set up.
-    """
     colorama.init()
     banner = "App Setup"
     print_banner(banner)
@@ -124,7 +118,6 @@ def setupApp() -> None:
 
     index_data(documents)
 
-    # Reset colorama on program exit
     colorama.deinit()
 
     print("Done.")
